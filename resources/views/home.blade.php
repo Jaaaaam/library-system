@@ -8,7 +8,7 @@
                 <div class="card-header">Library Borrowing System</div>
                 <div class="card-body">
                 <h2>All books</h2>
-
+                <all-books></all-books>
                 </div>
             </div>
             <br>
