@@ -14014,6 +14014,7 @@ window.Vue = __webpack_require__(37);
 
 Vue.component('example-component', __webpack_require__(40));
 Vue.component('all-books', __webpack_require__(43));
+Vue.component('all-users', __webpack_require__(51));
 
 var app = new Vue({
   el: '#app'
@@ -47992,6 +47993,409 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(11)
+/* script */
+var __vue_script__ = __webpack_require__(52)
+/* template */
+var __vue_template__ = __webpack_require__(53)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/AllUsers.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-70b04ad2", Component.options)
+  } else {
+    hotAPI.reload("data-v-70b04ad2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 52 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            users: [],
+            formData: {
+                student_number: ''
+            },
+            shouldShowAddUserForm: false,
+            shouldShowEditUserForm: false
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        axios.get('/users').then(function (res) {
+            _this.users = res.data;
+        });
+    },
+
+    methods: {
+        showAddUserForm: function showAddUserForm() {
+            this.shouldShowAddUserForm = true;
+        },
+        showEditUserForm: function showEditUserForm(user) {
+            this.formData.name = user.name;
+
+            this.shouldShowEditUserForm = true;
+        },
+        addUser: function addUser(e) {
+            var _this2 = this;
+
+            e.preventDefault();
+            console.log(this.formData, 'formData');
+            axios.post('/add-user', this.formData).then(function (res) {
+                _this2.shouldShowAddUserForm = false;
+                _this2.user.push(res.data);
+            });
+        },
+        editUser: function editUser(id, e) {
+            var _this3 = this;
+
+            e.preventDefault();
+            var edittedData = _extends({}, this.formData, { id: id });
+            console.log(edittedData, 'edittedData');
+            axios.post('/edit-user', edittedData).then(function (res) {
+                _this3.shouldShowEditUserForm = false;
+            });
+        },
+        deleteUser: function deleteUser(id, e) {
+            var _this4 = this;
+
+            e.preventDefault();
+            axios.post('/delete-user', { id: id }).then(function (res) {
+                var deletedData = _.remove(_this4.users, { id: id });
+
+                console.log(deletedData);
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _c("h2", [_vm._v("All Users")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          on: {
+            click: function($event) {
+              _vm.showAddUserForm()
+            }
+          }
+        },
+        [_vm._v("Add user")]
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.shouldShowAddUserForm,
+              expression: "shouldShowAddUserForm"
+            }
+          ]
+        },
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.formData.name,
+                  expression: "formData.name"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { id: "name", placeholder: "Enter name" },
+              domProps: { value: _vm.formData.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.formData, "name", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "name" } }, [_vm._v("Student Number")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.formData.student_number,
+                  expression: "formData.student_number"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "student_number",
+                placeholder: "Enter Student Number"
+              },
+              domProps: { value: _vm.formData.student_number },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.formData, "student_number", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              on: {
+                click: function($event) {
+                  _vm.addUser($event)
+                }
+              }
+            },
+            [_vm._v("Submit")]
+          ),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("br")
+        ]
+      ),
+      _vm._v(" "),
+      _vm._l(_vm.users, function(user) {
+        return _c("div", { key: user.id, staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _vm._v(_vm._s(user.name))
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("p", [_vm._v(_vm._s(user.student_number))]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                on: {
+                  click: function($event) {
+                    _vm.showEditUserForm(user)
+                  }
+                }
+              },
+              [_vm._v("Edit")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                on: {
+                  click: function($event) {
+                    _vm.deleteUser(user.id, $event)
+                  }
+                }
+              },
+              [_vm._v("Delete")]
+            ),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.shouldShowEditUserForm,
+                    expression: "shouldShowEditUserForm"
+                  }
+                ]
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.formData.student_number,
+                        expression: "formData.student_number"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "name", placeholder: "Enter name" },
+                    domProps: { value: _vm.formData.student_number },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.formData,
+                          "student_number",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    on: {
+                      click: function($event) {
+                        _vm.editUser(user.id, $event)
+                      }
+                    }
+                  },
+                  [_vm._v("Submit")]
+                ),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("br")
+              ]
+            )
+          ])
+        ])
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-70b04ad2", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

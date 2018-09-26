@@ -18,9 +18,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin', 'UserController@index')->name('admin');
 Route::get('/books', 'BookController@index');
 Route::post('/add-book', 'BookController@add');
 Route::post('/edit-book', 'BookController@edit');
 Route::post('/delete-book', 'BookController@delete');
 Route::post('/borrow-book', 'BookController@borrow');
 Route::post('/return-book', 'BookController@return');
+
+Route::get('/users', 'UserController@showAll');
