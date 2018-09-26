@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('role');
             $table->rememberToken();
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
         });
     }
