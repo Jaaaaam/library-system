@@ -47470,11 +47470,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            books: []
+            books: [],
+            shouldShowAddBookForm: false,
+            shouldShowEditBookForm: false
         };
     },
     created: function created() {
@@ -47483,6 +47511,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         axios.get('/books').then(function (res) {
             _this.books = res.data;
         });
+    },
+
+    methods: {
+        showAddBookForm: function showAddBookForm() {
+            this.shouldShowAddBookForm = true;
+        },
+        addBook: function addBook(book) {}
     }
 });
 
@@ -47495,15 +47530,121 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "ul",
-    _vm._l(_vm.books, function(book) {
-      return _c("li", { key: book.id }, [
-        _vm._v("\n        " + _vm._s(book.name) + "\n    ")
-      ])
-    })
+    "div",
+    { staticClass: "container" },
+    [
+      _c("h2", [_vm._v("All books")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          on: {
+            click: function($event) {
+              _vm.showAddBookForm()
+            }
+          }
+        },
+        [_vm._v("Add book")]
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.shouldShowAddBookForm,
+              expression: "shouldShowAddBookForm"
+            }
+          ]
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+            [_vm._v("Submit")]
+          ),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("br")
+        ]
+      ),
+      _vm._v(" "),
+      _vm._l(_vm.books, function(book) {
+        return _c("div", { key: book.id, staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _vm._v(_vm._s(book.name))
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("p", [_vm._v(_vm._s(book.description))])
+          ])
+        ])
+      })
+    ],
+    2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { id: "name", placeholder: "Enter name" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "description" } }, [_vm._v("description")]),
+      _vm._v(" "),
+      _c("textarea", {
+        staticClass: "form-control",
+        attrs: { id: "description", placeholder: "Enter description" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "no_of_pages" } }, [
+        _vm._v("Number of Pages")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "number",
+          id: "no_of_pages",
+          placeholder: "Enter number of pages"
+        }
+      })
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

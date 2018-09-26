@@ -6,8 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Library Borrowing System</div>
-                <div class="card-body">
-                <h2>All books</h2>
+                <div class="card-body"> 
                 <all-books></all-books>
                 </div>
             </div>
