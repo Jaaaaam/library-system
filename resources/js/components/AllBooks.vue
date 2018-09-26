@@ -100,6 +100,11 @@
 
                 })
             },
+            returnBook(id) {
+                axios.post('/return-book', {id}).then((res) => {
+
+                })
+            },
             addBook(e) {
                 e.preventDefault()
                 console.log(this.formData, 'formData')

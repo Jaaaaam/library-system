@@ -47567,6 +47567,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         borrowBook: function borrowBook(id) {
             axios.post('/borrow-book', { id: id }).then(function (res) {});
         },
+        returnBook: function returnBook(id) {
+            axios.post('/return-book', { id: id }).then(function (res) {});
+        },
         addBook: function addBook(e) {
             var _this2 = this;
 

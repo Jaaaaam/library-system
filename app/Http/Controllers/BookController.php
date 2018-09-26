@@ -70,4 +70,18 @@ class BookController extends Controller
         
         return $book;
     }
+
+    public function return(Request $request, Book $book)
+    {
+        Log::debug( $request);
+
+        $book = Book::find($request->id);
+
+        $book->returned_at = now();
+        $book->borrowed_at = NULL;
+        $book->borrowed_by = NULL;
+        $book->save();
+        
+        return $book;
+    }
 }
