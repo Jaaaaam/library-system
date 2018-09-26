@@ -19,3 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/books', 'BookController@index');
+Route::post('/add-book', 'BookController@add');
+Route::post('/edit-book', 'BookController@edit');

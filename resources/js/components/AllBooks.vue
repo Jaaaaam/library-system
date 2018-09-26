@@ -7,17 +7,17 @@
         <form v-show="shouldShowAddBookForm">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input class="form-control" id="name" placeholder="Enter name">
+                <input v-model="formData.name"  class="form-control" id="name" placeholder="Enter name">
             </div>
             <div class="form-group">
                 <label for="description">description</label>
-                <textarea class="form-control" id="description" placeholder="Enter description" />
+                <textarea v-model="formData.description"  class="form-control" id="description" placeholder="Enter description" />
             </div>
             <div class="form-group">
                 <label for="no_of_pages">Number of Pages</label>
-                <input class="form-control" type="number" id="no_of_pages" placeholder="Enter number of pages">
+                <input v-model="formData.no_of_pages"  class="form-control" type="number" id="no_of_pages" placeholder="Enter number of pages">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button @click="addBook($event)" class="btn btn-primary">Submit</button>
             <br>
             <br>
         </form>
@@ -26,6 +26,26 @@
             <div class="card-header">{{ book.name }}</div>
             <div class="card-body">
                 <p>{{ book.description }}</p>
+                <button @click="showEditBookForm(book)" class="btn btn-primary">Edit</button>
+                <br>
+                <br>
+                <form v-show="shouldShowEditBookForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input v-model="formData.name"  class="form-control" id="name" placeholder="Enter name">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">description</label>
+                        <textarea v-model="formData.description"  class="form-control" id="description" placeholder="Enter description" />
+                    </div>
+                    <div class="form-group">
+                        <label for="no_of_pages">Number of Pages</label>
+                        <input v-model="formData.no_of_pages"  class="form-control" type="number" id="no_of_pages" placeholder="Enter number of pages">
+                    </div>
+                    <button @click="editBook(book.id, $event)" class="btn btn-primary">Submit</button>
+                    <br>
+                    <br>
+                </form>
             </div>
         </div>
     </div>
@@ -37,6 +57,11 @@
         data() {
             return {
                 books: [],
+                formData: {
+                    name: '',
+                    description: '',
+                    no_of_pages: ''
+                },
                 shouldShowAddBookForm: false,
                 shouldShowEditBookForm: false
             }
@@ -50,8 +75,28 @@
             showAddBookForm() {
                 this.shouldShowAddBookForm = true
             },
-            addBook(book) {
+            showEditBookForm(book) {
+                this.formData.name = book.name
+                this.formData.description = book.description
+                this.formData.no_of_pages = book.no_of_pages
 
+                this.shouldShowEditBookForm = true
+            },
+            addBook(e) {
+                e.preventDefault()
+                console.log(this.formData, 'formData')
+                axios.post('/add-book', this.formData).then((res) => {
+                    this.shouldShowAddBookForm = false
+                    this.books.push(res.data)
+                })
+            },
+            editBook(id, e) {
+                e.preventDefault()
+                let edittedData = {...this.formData, id}
+                console.log(edittedData, 'edittedData')
+                axios.post('/edit-book', edittedData).then((res) => {
+                    this.shouldShowEditBookForm = false
+                })
             }
         }
     }
