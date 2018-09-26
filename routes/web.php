@@ -27,3 +27,6 @@ Route::post('/borrow-book', 'BookController@borrow');
 Route::post('/return-book', 'BookController@return');
 
 Route::get('/users', 'UserController@showAll');
+Route::post('/add-user', 'UserController@add');
+Route::post('/edit-user', 'UserController@edit');
+Route::post('/delete-user', 'UserController@delete');

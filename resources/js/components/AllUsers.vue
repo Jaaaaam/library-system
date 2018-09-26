@@ -13,7 +13,25 @@
                 <label for="name">Student Number</label>
                 <input v-model="formData.student_number"  class="form-control" id="student_number" placeholder="Enter Student Number">
             </div>
-
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input 
+                v-model="formData.email"  class="form-control" id="email" 
+                type="email"
+                placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="password">password</label>
+                <input 
+                v-model="formData.password"  class="form-control" id="password" 
+                type="password" >
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">confirm_password</label>
+                <input 
+                v-model="formData.confirm_password"  class="form-control" id="confirm_password" 
+                type="password" >
+            </div>
             <button @click="addUser($event)" class="btn btn-primary">Submit</button>
             <br>
             <br>
@@ -32,6 +50,25 @@
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input v-model="formData.student_number"  class="form-control" id="name" placeholder="Enter name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input 
+                        v-model="formData.email"  class="form-control" id="email" 
+                        type="email"
+                        placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">password</label>
+                        <input 
+                        v-model="formData.password"  class="form-control" id="password" 
+                        type="password" >
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password">confirm_password</label>
+                        <input 
+                        v-model="formData.confirm_password"  class="form-control" id="confirm_password" 
+                        type="password" >
                     </div>
                     <button @click="editUser(user.id, $event)" class="btn btn-primary">Submit</button>
                     <br>
@@ -52,6 +89,10 @@
                 users: [],
                 formData: {
                     student_number: '',
+                    email: '',
+                    name: '',
+                    password: '',
+                    confirm_password: ''
                 },
                 shouldShowAddUserForm: false,
                 shouldShowEditUserForm: false
@@ -68,6 +109,8 @@
             },
             showEditUserForm(user) {
                 this.formData.name = user.name
+                this.formData.email = user.email
+                this.formData.student_number = user.student_number
 
                 this.shouldShowEditUserForm = true
             },
@@ -76,7 +119,7 @@
                 console.log(this.formData, 'formData')
                 axios.post('/add-user', this.formData).then((res) => {
                     this.shouldShowAddUserForm = false
-                    this.user.push(res.data)
+                    this.users.push(res.data)
                 })
             },
             editUser(id, e) {

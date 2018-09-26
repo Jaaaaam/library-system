@@ -48100,13 +48100,54 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             users: [],
             formData: {
-                student_number: ''
+                student_number: '',
+                email: '',
+                name: '',
+                password: '',
+                confirm_password: ''
             },
             shouldShowAddUserForm: false,
             shouldShowEditUserForm: false
@@ -48126,6 +48167,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
         showEditUserForm: function showEditUserForm(user) {
             this.formData.name = user.name;
+            this.formData.email = user.email;
+            this.formData.student_number = user.student_number;
 
             this.shouldShowEditUserForm = true;
         },
@@ -48136,7 +48179,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             console.log(this.formData, 'formData');
             axios.post('/add-user', this.formData).then(function (res) {
                 _this2.shouldShowAddUserForm = false;
-                _this2.user.push(res.data);
+                _this2.users.push(res.data);
             });
         },
         editUser: function editUser(id, e) {
@@ -48261,6 +48304,94 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.formData.email,
+                  expression: "formData.email"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "email",
+                type: "email",
+                placeholder: "Enter your email"
+              },
+              domProps: { value: _vm.formData.email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.formData, "email", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "password" } }, [_vm._v("password")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.formData.password,
+                  expression: "formData.password"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { id: "password", type: "password" },
+              domProps: { value: _vm.formData.password },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.formData, "password", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "confirm_password" } }, [
+              _vm._v("confirm_password")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.formData.confirm_password,
+                  expression: "formData.confirm_password"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { id: "confirm_password", type: "password" },
+              domProps: { value: _vm.formData.confirm_password },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.formData,
+                    "confirm_password",
+                    $event.target.value
+                  )
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
           _c(
             "button",
             {
@@ -48355,6 +48486,96 @@ var render = function() {
                         _vm.$set(
                           _vm.formData,
                           "student_number",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.formData.email,
+                        expression: "formData.email"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "email",
+                      type: "email",
+                      placeholder: "Enter your email"
+                    },
+                    domProps: { value: _vm.formData.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.formData, "email", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "password" } }, [
+                    _vm._v("password")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.formData.password,
+                        expression: "formData.password"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "password", type: "password" },
+                    domProps: { value: _vm.formData.password },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.formData, "password", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "confirm_password" } }, [
+                    _vm._v("confirm_password")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.formData.confirm_password,
+                        expression: "formData.confirm_password"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "confirm_password", type: "password" },
+                    domProps: { value: _vm.formData.confirm_password },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.formData,
+                          "confirm_password",
                           $event.target.value
                         )
                       }
