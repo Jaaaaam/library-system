@@ -27,6 +27,7 @@
             <div class="card-body">
                 <p>{{ book.description }}</p>
                 <button @click="showEditBookForm(book)" class="btn btn-primary">Edit</button>
+                <button @click="deleteBook(book.id, $event)" class="btn btn-danger">Delete</button>
                 <br>
                 <br>
                 <form v-show="shouldShowEditBookForm">
@@ -96,6 +97,14 @@
                 console.log(edittedData, 'edittedData')
                 axios.post('/edit-book', edittedData).then((res) => {
                     this.shouldShowEditBookForm = false
+                })
+            },
+            deleteBook(id, e) {
+                e.preventDefault()
+                axios.post('/delete-book', {id}).then((res) => {
+                    const deletedData = _.remove(this.books, {id})
+
+                    console.log(deletedData)
                 })
             }
         }

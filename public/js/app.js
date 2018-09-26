@@ -47518,6 +47518,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -47569,6 +47570,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             console.log(edittedData, 'edittedData');
             axios.post('/edit-book', edittedData).then(function (res) {
                 _this3.shouldShowEditBookForm = false;
+            });
+        },
+        deleteBook: function deleteBook(id, e) {
+            var _this4 = this;
+
+            e.preventDefault();
+            axios.post('/delete-book', { id: id }).then(function (res) {
+                var deletedData = _.remove(_this4.books, { id: id });
+
+                console.log(deletedData);
             });
         }
     }
@@ -47743,6 +47754,19 @@ var render = function() {
                 }
               },
               [_vm._v("Edit")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                on: {
+                  click: function($event) {
+                    _vm.deleteBook(book.id, $event)
+                  }
+                }
+              },
+              [_vm._v("Delete")]
             ),
             _vm._v(" "),
             _c("br"),
