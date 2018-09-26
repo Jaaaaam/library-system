@@ -18,7 +18,9 @@ class CreateBooksTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->integer('no_of_pages');
-            $table->integer('borrowed_by')->nullable();
+            $table->integer('borrowed_by')->references('id')->on('users')->nullable();
+            $table->date('borrowed_at')->nullable();
+            $table->date('returned_at')->nullable();
             $table->timestamps();
         });
     }

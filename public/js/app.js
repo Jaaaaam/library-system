@@ -47519,6 +47519,18 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -47551,6 +47563,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.formData.no_of_pages = book.no_of_pages;
 
             this.shouldShowEditBookForm = true;
+        },
+        borrowBook: function borrowBook(id) {
+            axios.post('/borrow-book', { id: id }).then(function (res) {});
         },
         addBook: function addBook(e) {
             var _this2 = this;
@@ -47742,6 +47757,57 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c("p", [_vm._v(_vm._s(book.description))]),
+            _vm._v(" "),
+            !book.borrowed_at
+              ? _c("div", [
+                  _c("p", [_vm._v("STATUS: Available")]),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: book.returned_at,
+                          expression: "book.returned_at"
+                        }
+                      ]
+                    },
+                    [_vm._v("Returned last: " + _vm._s(book.returned_at))]
+                  )
+                ])
+              : _c("div", [
+                  _c("p", [_vm._v("STATUS: Borrowed")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Borrowed on: " + _vm._s(book.borrowed_at))])
+                ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                on: {
+                  click: function($event) {
+                    _vm.borrowBook(book.id)
+                  }
+                }
+              },
+              [_vm._v("Borrow")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                on: {
+                  click: function($event) {
+                    _vm.returnBook(book.id)
+                  }
+                }
+              },
+              [_vm._v("Return")]
+            ),
             _vm._v(" "),
             _c(
               "button",

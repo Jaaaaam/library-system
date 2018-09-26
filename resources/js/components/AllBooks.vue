@@ -26,6 +26,16 @@
             <div class="card-header">{{ book.name }}</div>
             <div class="card-body">
                 <p>{{ book.description }}</p>
+                <div v-if="!book.borrowed_at">
+                    <p>STATUS: Available</p>
+                    <p v-show="book.returned_at">Returned last: {{ book.returned_at }}</p>
+                </div>
+                <div v-else>
+                    <p>STATUS: Borrowed</p>
+                    <p>Borrowed on: {{ book.borrowed_at }}</p>
+                </div>
+                <button @click="borrowBook(book.id)" class="btn btn-primary">Borrow</button>
+                <button @click="returnBook(book.id)" class="btn btn-primary">Return</button>
                 <button @click="showEditBookForm(book)" class="btn btn-primary">Edit</button>
                 <button @click="deleteBook(book.id, $event)" class="btn btn-danger">Delete</button>
                 <br>
@@ -48,7 +58,9 @@
                     <br>
                 </form>
             </div>
+
         </div>
+        
     </div>
     
 </template>
@@ -82,6 +94,11 @@
                 this.formData.no_of_pages = book.no_of_pages
 
                 this.shouldShowEditBookForm = true
+            },
+            borrowBook(id) {
+                axios.post('/borrow-book', {id}).then((res) => {
+
+                })
             },
             addBook(e) {
                 e.preventDefault()
